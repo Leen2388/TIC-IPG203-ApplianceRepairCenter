@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" direction="ltr" style="direction:ltr" width="700" height="450" viewBox="0 0 700 450">
+<defs><marker id="inherit" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1,1 L12,7 L1,13 Z" fill="white" stroke="#263d52"/></marker></defs>
+<g fill="#f4f7fa" stroke="#263d52" stroke-width="1.5">
+<rect x="210" y="8" width="280" height="98" rx="3"/>
+<rect x="190" y="150" width="320" height="130" rx="3"/>
+<rect x="8" y="350" width="212" height="82" rx="3"/>
+<rect x="245" y="350" width="212" height="82" rx="3"/>
+<rect x="482" y="350" width="212" height="82" rx="3"/>
+<path d="M350 150 L350 108" stroke-dasharray="6 4" fill="none" marker-end="url(#inherit)"/>
+<path d="M114 350 L114 315 L350 315 L350 282" fill="none" marker-end="url(#inherit)"/>
+<path d="M351 350 L351 315" fill="none"/>
+<path d="M588 350 L588 315 L350 315" fill="none"/>
+</g><g fill="#203649" font-family="Arial" text-anchor="middle" font-size="14">
+<text x="350" y="29">«interface» IRepairable</text>
+<text x="350" y="51">StartRepair(), SetRepairDetails(...)</text>
+<text x="350" y="73">CalculateRepairCost(): decimal</text>
+<text x="350" y="95">CompleteRepair(), Deliver()</text>
+<text x="350" y="174" font-weight="bold">«abstract» Appliance</text>
+<text x="350" y="198">SerialNumber, Brand, OwnerName, Status</text>
+<text x="350" y="220">LaborCost, PartsCost, RepairDescription</text>
+<text x="350" y="242" font-style="italic">CalculateRepairCost(): decimal {abstract}</text>
+<text x="350" y="265">StatusChanged: event | RepairedCount: static</text>
+<text x="114" y="374" font-weight="bold">Refrigerator</text>
+<text x="114" y="396">NeedsRefrigerant</text>
+<text x="114" y="418">CalculateRepairCost() override</text>
+<text x="351" y="374" font-weight="bold">WashingMachine</text>
+<text x="351" y="396">NeedsDrumService</text>
+<text x="351" y="418">CalculateRepairCost() override</text>
+<text x="588" y="374" font-weight="bold">AirConditioner</text>
+<text x="588" y="396">NeedsDeepCleaning</text>
+<text x="588" y="418">CalculateRepairCost() override</text>
+<text x="406" y="134" font-size="12">implements</text>
+<text x="404" y="305" font-size="12">inherits</text>
+</g></svg>
