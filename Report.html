@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>تقرير مركز صيانة الأجهزة</title><style>
+@page {size:A4; margin:14mm;}
+* {box-sizing:border-box} body {margin:0; font-family:Tahoma,Arial,sans-serif;color:#1e2933;font-size:13px;line-height:1.75}
+.page {height:267mm;position:relative;break-after:page;padding:1px 0 14mm;display:flow-root}.page:last-child{break-after:auto}
+.eyebrow {font-size:12px;color:#546575;border-bottom:2px solid #325c78;padding-bottom:12px;margin-bottom:22px}
+h1 {font-size:29px;line-height:1.65;color:#234b68;margin:8px 0 10px} h2 {font-size:18px;color:#234b68;margin:14px 0 7px;border-bottom:1px solid #c9d5df;padding-bottom:5px}
+h3 {font-size:15px;color:#234b68;margin:15px 0 5px} p {margin:7px 0;text-align:justify} .subtitle{color:#526575;font-size:15px;margin-bottom:22px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}th,td{padding:8px 7px;border:1px solid #ced8e0;text-align:right;vertical-align:top}th{background:#eaf0f5;color:#234b68}tr:nth-child(even){background:#f8fafb}
+code{font-family:Consolas,monospace;font-size:.93em;direction:ltr;unicode-bidi:embed;color:#244c67}pre {direction:ltr;text-align:left;white-space:pre-wrap;background:#f1f5f8;border-left:3px solid #607e93;font-family:Consolas,monospace;font-size:12px;line-height:1.65;padding:10px;margin:10px 0}
+.note {background:#f1f5f8;border-right:3px solid #607e93;padding:10px 13px;margin-top:16px;font-size:12.5px}.muted,.caption{color:#60717e;font-size:12px}.caption{text-align:center}.diagram svg{width:100%;height:auto;max-height:106mm}.diagram{margin:12px 0}.flow{background:#edf3f7;text-align:center;padding:13px;font-family:Consolas,monospace;font-size:16px}
+footer{position:absolute;bottom:0;width:100%;border-top:1px solid #ced8e0;padding-top:6px;color:#6b7c88;font-size:10px;display:flex;justify-content:space-between}
+@media screen {body{background:#e8edf1}.page{background:white;width:182mm;margin:18px auto;padding:12mm;height:auto;min-height:268mm}footer{position:static;margin-top:18px}.diagram svg{max-height:none}}
+</style><body><section class="page">
+<div class="eyebrow">الجامعة الافتراضية السورية · المعهد التقاني للحاسوب</div>
+<h1>نظام إدارة مركز صيانة<br>الأجهزة المنزلية</h1>
+<p class="subtitle">تقرير الوظيفة التطبيقية · البرمجة والتصميم غرضية التوجه<br><bdi>TIC_IPG203_F25</bdi></p>
+<h2>فكرة المشروع</h2>
+<p>اخترنا بناء برنامج بسيط يساعد موظف مركز الصيانة على تسجيل الأجهزة ومتابعة إصلاحها. يدعم البرنامج الثلاجة والغسالة والمكيف، ويحفظ اسم صاحب الجهاز والعلامة التجارية والرقم التسلسلي وتاريخ الاستلام وموعد التسليم المتوقع.</p>
+<p>يبدأ الجهاز بحالة الاستلام، ثم ينتقل إلى الصيانة. بعد تسجيل العمل المنفذ وأجرة اليد وثمن القطع، يمكن إنهاء الإصلاح، وعندها يظهر إشعار بأن الجهاز أصبح جاهزاً للتسليم. اخترنا واجهة Console حتى يكون التركيز على تصميم الفئات والعلاقات بينها.</p>
+<h2>بيانات الفريق</h2>
+<p class="muted">تُستكمل البيانات الحقيقية قبل تسليم التقرير.</p>
+<table><thead><tr><th>العضو</th><th>الاسم الكامل</th><th>الرقم الجامعي</th><th>حساب GitHub</th></tr></thead><tbody>
+<tr><td>١</td><td>........................</td><td>................</td><td>................</td></tr>
+<tr><td>٢</td><td>........................</td><td>................</td><td>................</td></tr>
+<tr><td>٣</td><td>........................</td><td>................</td><td>................</td></tr>
+<tr><td>٤</td><td>........................</td><td>................</td><td>................</td></tr>
+<tr><td>٥</td><td>........................</td><td>................</td><td>................</td></tr>
+</tbody></table>
+<p>الصف: ...................... &nbsp;&nbsp; اسم المدرس: ....................................</p>
+<div class="note">الوظيفة مخصصة لخمسة طلاب من الصف نفسه وللمدرس نفسه. موعد التسليم الوارد في التكليف: <bdi>2026-11-12</bdi>.</div>
+<footer><span dir="ltr">TIC_IPG203_F25 · Appliance Repair Center</span><span dir="ltr">1 / 5</span></footer></section><section class="page">
+<h2>١. تصميم الفئات والعلاقات</h2>
+<p>بدأنا بالعمليات المشتركة بين الأجهزة ووضعناها في الواجهة <code>IRepairable</code>. بعدها أنشأنا الفئة المجردة <code>Appliance</code> لتجميع البيانات والسلوك المشترك. تختلف طريقة حساب التكلفة بحسب نوع الجهاز، لذلك تركنا الدالة <code>CalculateRepairCost()</code> مجردة وطبقناها في الفئات الثلاث المشتقة.</p>
+<div class="diagram"><svg xmlns="http://www.w3.org/2000/svg" direction="ltr" style="direction:ltr" width="700" height="450" viewBox="0 0 700 450">
+<defs><marker id="inherit" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M1,1 L12,7 L1,13 Z" fill="white" stroke="#263d52"/></marker></defs>
+<g fill="#f4f7fa" stroke="#263d52" stroke-width="1.5">
+<rect x="210" y="8" width="280" height="98" rx="3"/>
+<rect x="190" y="150" width="320" height="130" rx="3"/>
+<rect x="8" y="350" width="212" height="82" rx="3"/>
+<rect x="245" y="350" width="212" height="82" rx="3"/>
+<rect x="482" y="350" width="212" height="82" rx="3"/>
+<path d="M350 150 L350 108" stroke-dasharray="6 4" fill="none" marker-end="url(#inherit)"/>
+<path d="M114 350 L114 315 L350 315 L350 282" fill="none" marker-end="url(#inherit)"/>
+<path d="M351 350 L351 315" fill="none"/>
+<path d="M588 350 L588 315 L350 315" fill="none"/>
+</g><g fill="#203649" font-family="Arial" text-anchor="middle" font-size="14">
+<text x="350" y="29">«interface» IRepairable</text>
+<text x="350" y="51">StartRepair(), SetRepairDetails(...)</text>
+<text x="350" y="73">CalculateRepairCost(): decimal</text>
+<text x="350" y="95">CompleteRepair(), Deliver()</text>
+<text x="350" y="174" font-weight="bold">«abstract» Appliance</text>
+<text x="350" y="198">SerialNumber, Brand, OwnerName, Status</text>
+<text x="350" y="220">LaborCost, PartsCost, RepairDescription</text>
+<text x="350" y="242" font-style="italic">CalculateRepairCost(): decimal {abstract}</text>
+<text x="350" y="265">StatusChanged: event | RepairedCount: static</text>
+<text x="114" y="374" font-weight="bold">Refrigerator</text>
+<text x="114" y="396">NeedsRefrigerant</text>
+<text x="114" y="418">CalculateRepairCost() override</text>
+<text x="351" y="374" font-weight="bold">WashingMachine</text>
+<text x="351" y="396">NeedsDrumService</text>
+<text x="351" y="418">CalculateRepairCost() override</text>
+<text x="588" y="374" font-weight="bold">AirConditioner</text>
+<text x="588" y="396">NeedsDeepCleaning</text>
+<text x="588" y="418">CalculateRepairCost() override</text>
+<text x="406" y="134" font-size="12">implements</text>
+<text x="404" y="305" font-size="12">inherits</text>
+</g></svg></div>
+<p class="caption">السهم المثلث المتقطع يعني تطبيق الواجهة، والمتصل يعني الوراثة. الفئات المشتقة الثلاث تعيد تعريف دالة حساب التكلفة.</p>
+<p>تحتوي الفئة <code>RepairCenter</code> على قائمة خاصة من النوع <code>List&lt;Appliance&gt;</code>؛ أي إن مركزاً واحداً يدير عدة أجهزة. توفر <code>AddDevice()</code> و<code>Find()</code> و<code>GetByStatus()</code> و<code>CalculateTotalCost()</code>، وتعيد نشر إشعارات تغير الحالة إلى واجهة البرنامج.</p>
+<h2>تنظيم ملفات الحل</h2>
+<table><thead><tr><th>المجلد أو الملف</th><th>المحتوى</th></tr></thead><tbody>
+<tr><td><code>Contracts</code></td><td>الواجهة المشتركة للأجهزة.</td></tr>
+<tr><td><code>Models</code></td><td>الفئة المجردة والأنواع الثلاثة وتعداد الحالات.</td></tr>
+<tr><td><code>Events / Utilities / Services</code></td><td>التفويض، التحقق من البيانات، وإدارة قائمة الأجهزة.</td></tr>
+<tr><td><code>Program.cs / Demo.cs / SelfTests.cs</code></td><td>القائمة التفاعلية والمثال التجريبي وفحوص التحقق.</td></tr>
+</tbody></table>
+<footer><span dir="ltr">TIC_IPG203_F25 · Appliance Repair Center</span><span dir="ltr">2 / 5</span></footer></section><section class="page">
+<h2>٢. تطبيق مبادئ البرمجة غرضية التوجه</h2>
+<h3>التجريد · Abstraction</h3>
+<p>تحدد الواجهة <code>IRepairable</code> ما يجب أن يوفره أي جهاز قابل للصيانة: بدء الصيانة، تسجيل تفاصيلها، حساب التكلفة، إنهاء الإصلاح والتسليم. لا تتضمن الواجهة طريقة تنفيذ هذه العمليات. تطبق <code>Appliance</code> العمليات المشتركة، وتترك حساب التكلفة للفئات المشتقة.</p>
+<pre>public abstract class Appliance : IRepairable
+public abstract decimal CalculateRepairCost();</pre>
+<h3>الوراثة · Inheritance</h3>
+<p>ترث <code>Refrigerator</code> و<code>WashingMachine</code> و<code>AirConditioner</code> من <code>Appliance</code>. بهذا لم نكرر بيانات صاحب الجهاز أو التواريخ أو منطق تغيير الحالة في كل نوع. أضفنا لكل نوع خاصية توضح الخدمة الإضافية المناسبة له، مثل <code>NeedsRefrigerant</code> للثلاجة.</p>
+<h3>تعدد الأشكال · Polymorphism</h3>
+<p>تستقبل قائمة المركز الأجهزة بصفتها <code>Appliance</code>، ثم تستدعي دالة الحساب نفسها لجميع العناصر. ينفذ البرنامج نسخة <code>override</code> المناسبة لنوع كل كائن وقت التشغيل؛ لذلك لا تحتاج دالة جمع التكاليف إلى شرط يحدد نوع الجهاز.</p>
+<pre>decimal total = 0m;
+foreach (Appliance device in _devices)
+    total += device.CalculateRepairCost();
+return total;</pre>
+<h3>التغليف · Encapsulation</h3>
+<p>جميع الحقول خاصة. مثلاً <code>_serialNumber</code> حقل <code>private readonly</code>، وتعرضه خاصية <code>SerialNumber</code> للقراءة فقط. ينطبق ذلك أيضاً على العلامة التجارية وتاريخي الاستلام والتسليم المتوقع، فلا تتغير هذه القيم بعد إنشاء الكائن.</p>
+<p>تسمح خاصية <code>OwnerName</code> بالتعديل بعد التحقق من عدم فراغ الاسم. أما <code>Status</code> و<code>LaborCost</code> و<code>PartsCost</code> فتُقرأ من الخارج وتُعدل فقط عبر العمليات المخصصة. نتحقق من جميع قيم تفاصيل الإصلاح قبل حفظ أي منها، حتى لا يؤدي خطأ في ثمن القطع إلى تعديل أجرة اليد وحدها.</p>
+<p>تعرض <code>RepairCenter.Devices</code> قائمة للقراءة فقط، ولا تسمح بإضافة جهاز من خارج <code>AddDevice()</code> وتجاوز فحص تكرار الرقم التسلسلي.</p>
+<footer><span dir="ltr">TIC_IPG203_F25 · Appliance Repair Center</span><span dir="ltr">3 / 5</span></footer></section><section class="page">
+<h2>٣. الحالات والتفويض والأحداث</h2>
+<div class="flow" dir="ltr">Received → UnderRepair → Repaired → Delivered</div>
+<p>تمثل <code>RepairStatus</code> الحالات الأربع. تنفذ <code>StartRepair()</code> الانتقال من الاستلام إلى الصيانة. تتطلب <code>CompleteRepair()</code> وجود تفاصيل إصلاح مسجلة، ولا تسمح <code>Deliver()</code> بتسليم الجهاز قبل إصلاحه. لا تسمح النسخة الحالية بإعادة فتح جهاز مكتمل؛ أي مراجعة لاحقة تحتاج توسيع نموذج العمل.</p>
+<p>عرفنا التفويض <code>DeviceStatusChangedHandler</code> ليستقبل الجهاز وحالته القديمة والجديدة. تستخدمه <code>Appliance</code> في الحدث <code>StatusChanged</code>. بعد تحديث الحالة في <code>ChangeStatus()</code> نطلق الحدث:</p>
+<pre>StatusChanged?.Invoke(this, old, next);</pre>
+<p>يشترك <code>RepairCenter</code> عند إضافة الجهاز، ثم يمرر الحدث عبر <code>DeviceStatusChanged</code>. تشترك واجهة <code>Program</code> بهذا الحدث، وإذا كانت الحالة الجديدة <code>Repaired</code> تعرض رسالة الجاهزية واسم صاحب الجهاز. بهذا بقي منطق الصيانة داخل النموذج، بينما بقي عرض الرسالة في الواجهة. الإشعار رسالة على الشاشة فقط.</p>
+<h2>٤. الفئات والأعضاء الثابتة</h2>
+<p>أنشأنا الفئة الثابتة <code>InputValidator</code> لتجميع التحقق من البيانات. تتأكد <code>SerialNumber()</code> من أن الرقم يتكون من ٣ إلى ٣٠ محرفاً من الأحرف الإنكليزية والأرقام والشرطة، وتحوله إلى أحرف كبيرة. تمنع <code>NonNegative()</code> التكلفة السالبة أو الأكبر من مليون، وتفحص <code>Dates()</code> ترتيب التواريخ وألا يكون الاستلام في المستقبل.</p>
+<p>تعرض الخاصية الثابتة <code>Appliance.RepairedCount</code> عدد الإصلاحات المكتملة خلال تشغيل البرنامج. يزيد الحقل الخاص <code>_repairedCount</code> مرة واحدة عند الإكمال. يبقى الجهاز محسوباً بعد تسليمه؛ أما عدد الأجهزة الجاهزة حالياً فيحسب بتصفية الحالة <code>Repaired</code>.</p>
+<h2>٥. طريقة حساب تكلفة الإصلاح</h2>
+<table><thead><tr><th>النوع</th><th>الحساب بعد تسجيل تفاصيل الإصلاح</th></tr></thead><tbody>
+<tr><td>الثلاجة</td><td>أجرة اليد + القطع + ٤٠ عند الحاجة إلى خدمة الغاز.</td></tr>
+<tr><td>الغسالة</td><td>أجرة اليد + القطع + ٢٥ عند الحاجة إلى خدمة الحوض.</td></tr>
+<tr><td>المكيف</td><td>أجرة اليد + القطع + ٣٠ عند الحاجة إلى تنظيف عميق.</td></tr>
+</tbody></table>
+<p class="muted">الأسعار افتراضية بوحدة نقدية موحدة لأغراض المشروع. قبل تسجيل تفاصيل العمل تكون التكلفة صفراً. السعر الإضافي منفصل عن أجرة اليد والقطع المدخلتين.</p>
+<footer><span dir="ltr">TIC_IPG203_F25 · Appliance Repair Center</span><span dir="ltr">4 / 5</span></footer></section><section class="page">
+<h2>٦. التشغيل والنتائج</h2>
+<p>يمكن فتح الحل <code>ApplianceRepairCenter.sln</code> في Visual Studio مع دعم .NET 8، أو استخدام الأوامر التالية من مجلد المشروع:</p>
+<pre>dotnet build ApplianceRepairCenter.sln -c Release
+dotnet run --project ApplianceRepairCenter.csproj
+dotnet run --project ApplianceRepairCenter.csproj -- --demo
+dotnet run --project ApplianceRepairCenter.csproj -- --self-test</pre>
+<p>في التشغيل التفاعلي نضيف الجهاز، ثم نبدأ صيانته ونسجل العمل والتكلفة، وبعد ذلك ننهي الإصلاح ونسلمه. تسمح القائمة أيضاً بعرض جميع الأجهزة أو تصفيتها حسب الحالة وعرض المجموع. تُدخل التواريخ بالشكل <code>yyyy-MM-dd</code> والأعداد العشرية بنقطة.</p>
+<h3>مثال التشغيل المرفق</h3>
+<table><thead><tr><th>الجهاز</th><th>الحالة النهائية في المثال</th><th>التكلفة</th></tr></thead><tbody>
+<tr><td><code>RF-101</code> · ثلاجة</td><td>تم الإصلاح، جاهز للتسليم</td><td>١٤٠ = ٤٠ + ٦٠ + ٤٠</td></tr>
+<tr><td><code>WM-102</code> · غسالة</td><td>قيد الصيانة</td><td>١٠٥ = ٣٠ + ٥٠ + ٢٥</td></tr>
+<tr><td><code>AC-103</code> · مكيف</td><td>تم التسليم</td><td>٩٥ = ٢٥ + ٤٠ + ٣٠</td></tr>
+</tbody></table>
+<p>ناتج المثال: مجموع التكاليف المسجلة <b>٣٤٠</b>، وجهاز واحد قيد الصيانة، وجهاز واحد جاهز للتسليم، وإصلاحان مكتملان في العداد الثابت. المجموع يشمل التكلفة المسجلة للغسالة رغم أنها قيد الصيانة، ولا يمثل مبالغ مالية مقبوضة.</p>
+<h3>التحقق من التنفيذ</h3>
+<p>نجح بناء إصدار Release دون أخطاء أو تحذيرات، ونجحت <b>٢٩ حالة تحقق</b> في <code>SelfTests</code>. شملت الفحوص صيغ التكلفة الثلاث، والجمع عبر القائمة، وتكرار الرقم التسلسلي، والتواريخ غير الصحيحة، والتكاليف السالبة، ومنع التسليم المبكر وتكرار الإكمال، وإطلاق الأحداث وتحديث العداد. أرفقنا المخرجات في <code>Verification.txt</code>.</p>
+<h3>حدود النسخة الحالية</h3>
+<p>البيانات محفوظة في الذاكرة وتختفي عند الإغلاق. لا تتضمن النسخة قاعدة بيانات أو رسائل خارجية أو فواتير. هذه الإضافات ممكنة لاحقاً؛ النسخة الحالية تركز على المتطلبات الخاصة بمبادئ OOP.</p>
+<h2>٧. رابط المشروع</h2>
+<div class="note">رابط مستودع GitHub:<br><a dir="ltr" style="display:block;overflow-wrap:anywhere" href="https://github.com/Leen2388/TIC-IPG203-ApplianceRepairCenter">https://github.com/Leen2388/TIC-IPG203-ApplianceRepairCenter</a>تُستكمل بيانات الفريق في الصفحة الأولى. مساهمة كل عضو تثبت بسجل commits الفعلي في المستودع.</div>
+<footer><span dir="ltr">TIC_IPG203_F25 · Appliance Repair Center</span><span dir="ltr">5 / 5</span></footer></section></body></html>
