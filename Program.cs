@@ -15,11 +15,11 @@ internal static class Program
         var center = new RepairCenter();
         center.DeviceStatusChanged += (device, oldStatus, newStatus) =>
         {
-            Console.WriteLine($"[Status] {device.SerialNumber}: {oldStatus} -> {newStatus}");
+            Console.WriteLine($"{device.SerialNumber}: {oldStatus} -> {newStatus}");
             if (newStatus == RepairStatus.Repaired)
-                Console.WriteLine($"[Notification] Repair complete for {device.OwnerName}. Ready for delivery.");
+                Console.WriteLine($"Repair finished for {device.OwnerName}. Ready for delivery.");
         };
-        Console.WriteLine("Home Appliance Repair Center - data is kept in memory only.");
+        Console.WriteLine("Appliance Repair Center");
         while (true)
         {
             Console.WriteLine("\n1 Add device  2 Start repair  3 Record work/cost  4 Complete repair");
@@ -53,7 +53,7 @@ internal static class Program
                     case "8":
                         Console.WriteLine($"Registered devices: {center.Devices.Count}");
                         Console.WriteLine($"Total recorded cost: {center.CalculateTotalCost():F2}");
-                        Console.WriteLine($"Completed repairs this process: {Appliance.RepairedCount}");
+                        Console.WriteLine($"Completed repairs: {Appliance.RepairedCount}");
                         break;
                     default: Console.WriteLine("Choose a number from the menu."); break;
                 }
@@ -103,7 +103,7 @@ internal static class Program
     private static decimal ReadCost(string label)
     {
         if (!decimal.TryParse(Read(label), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal cost))
-            throw new FormatException("Enter a positive number using a dot, such as 25.50.");
+            throw new FormatException("Enter a cost using a dot for decimals, for example 25.50.");
         return cost;
     }
     private static DateTime ReadDate(string label)
