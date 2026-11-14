@@ -10,9 +10,9 @@ public static class Demo
         var center = new RepairCenter();
         center.DeviceStatusChanged += (device, oldStatus, newStatus) =>
         {
-            Console.WriteLine($"EVENT {device.SerialNumber}: {oldStatus} -> {newStatus}");
+            Console.WriteLine($"{device.SerialNumber}: {oldStatus} -> {newStatus}");
             if (newStatus == RepairStatus.Repaired)
-                Console.WriteLine($"NOTICE: {device.SerialNumber} is ready for delivery.");
+                Console.WriteLine($"{device.SerialNumber} is ready for delivery.");
         };
         DateTime today = DateTime.Today;
         Appliance fridge = new Refrigerator("RF-101", "Beko", "Ahmad", today, today.AddDays(2), true);
@@ -34,6 +34,6 @@ public static class Demo
         Console.WriteLine($"Total recorded cost: {center.CalculateTotalCost():F2}");
         Console.WriteLine($"Under repair: {center.GetByStatus(RepairStatus.UnderRepair).Count()}");
         Console.WriteLine($"Ready for delivery: {center.GetByStatus(RepairStatus.Repaired).Count()}");
-        Console.WriteLine($"Completed repairs this process: {Appliance.RepairedCount}");
+        Console.WriteLine($"Completed repairs: {Appliance.RepairedCount}");
     }
 }
