@@ -12,7 +12,6 @@ public class Refrigerator : Appliance
         _needsRefrigerant = extraService;
     }
 
-    // Educational prices in a common, unspecified currency unit.
     public override decimal CalculateRepairCost()
     {
         if (!HasRepairDetails) return 0m;
