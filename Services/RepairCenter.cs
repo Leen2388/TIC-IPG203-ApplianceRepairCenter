@@ -32,7 +32,7 @@ public class RepairCenter
     public decimal CalculateTotalCost()
     {
         decimal total = 0m;
-        // The appropriate override is selected for each appliance at runtime.
+        // كل جهاز يحسب تكلفته حسب نوعه.
         foreach (Appliance device in _devices)
             total += device.CalculateRepairCost();
         return total;
