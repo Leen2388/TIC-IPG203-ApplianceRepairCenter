@@ -1,4 +1,4 @@
-COMMAND: dotnet ApplianceRepairCenter.dll --self-test
+SelfTests
 PASS: initial state
 PASS: no cost before diagnosis
 PASS: normalized lookup
@@ -30,15 +30,15 @@ PASS: no optional surcharge
 PASS: read-only device list
 RESULT: 29 checks passed.
 
-COMMAND: dotnet ApplianceRepairCenter.dll --demo
-EVENT RF-101: Received -> UnderRepair
-EVENT RF-101: UnderRepair -> Repaired
-NOTICE: RF-101 is ready for delivery.
-EVENT WM-102: Received -> UnderRepair
-EVENT AC-103: Received -> UnderRepair
-EVENT AC-103: UnderRepair -> Repaired
-NOTICE: AC-103 is ready for delivery.
-EVENT AC-103: Repaired -> Delivered
+Demo
+RF-101: Received -> UnderRepair
+RF-101: UnderRepair -> Repaired
+RF-101 is ready for delivery.
+WM-102: Received -> UnderRepair
+AC-103: Received -> UnderRepair
+AC-103: UnderRepair -> Repaired
+AC-103 is ready for delivery.
+AC-103: Repaired -> Delivered
 
 SERIAL | TYPE | STATUS | COST
 RF-101 | Refrigerator | Repaired | 140.00
@@ -47,52 +47,4 @@ AC-103 | AirConditioner | Delivered | 95.00
 Total recorded cost: 340.00
 Under repair: 1
 Ready for delivery: 1
-Completed repairs this process: 2
-
-INTERACTIVE MENU CHECK: add, start, record, complete, deliver, list, filter, totals
-Home Appliance Repair Center - data is kept in memory only.
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: 1 Refrigerator, 2 Washing machine, 3 Air conditioner
-Type: Serial number: Brand: Owner name: Received date (yyyy-MM-dd): Expected delivery date (yyyy-MM-dd): Refrigerant service (+40)? y/n: Device added.
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: Serial number: [Status] RF-900: Received -> UnderRepair
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: Serial number: Work description: Labor cost: Parts cost: 
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: Serial number: [Status] RF-900: UnderRepair -> Repaired
-[Notification] Repair complete for Ahmad. Ready for delivery.
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: Serial number: [Status] RF-900: Repaired -> Delivered
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: RF-900 | Refrigerator | Ahmad | Beko
-  Delivered | Due: 2026-11-12 | Cost: 140.00
-  Work: Cooling service
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: 0 Received, 1 UnderRepair, 2 Repaired, 3 Delivered
-Status number: RF-900 | Refrigerator | Ahmad | Beko
-  Delivered | Due: 2026-11-12 | Cost: 140.00
-  Work: Cooling service
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: Registered devices: 1
-Total recorded cost: 140.00
-Completed repairs this process: 1
-
-1 Add device  2 Start repair  3 Record work/cost  4 Complete repair
-5 Deliver  6 List all  7 Filter by status  8 Totals  0 Exit
-Choice: 
-Interactive menu check: PASS
+Completed repairs: 2
