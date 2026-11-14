@@ -27,7 +27,7 @@ public abstract class Appliance : IRepairable
     public decimal LaborCost => _laborCost;
     public decimal PartsCost => _partsCost;
     public bool HasRepairDetails => _hasRepairDetails;
-    // Cumulative completed repairs during this process, including delivered devices.
+    // العدد يبقى محسوباً بعد تسليم الجهاز أيضاً.
     public static int RepairedCount => _repairedCount;
     public string OwnerName
     {
@@ -56,7 +56,7 @@ public abstract class Appliance : IRepairable
     public void SetRepairDetails(string description, decimal laborCost, decimal partsCost)
     {
         RequireStatus(RepairStatus.UnderRepair);
-        // Validate everything before changing any stored value.
+        // نفحص القيم كلها قبل حفظ التعديل.
         string validDescription = InputValidator.RequiredText(description, "Repair description");
         decimal validLabor = InputValidator.NonNegative(laborCost, "Labor cost");
         decimal validParts = InputValidator.NonNegative(partsCost, "Parts cost");
